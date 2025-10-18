@@ -1,0 +1,13 @@
+ftfy
+unidecode
+pandas
+tqdm
+pymupdf
+requests
+gradio
+langchain-text-splitters
+transformers
+datasets
+accelerate
+peft
+unsloth[windows]

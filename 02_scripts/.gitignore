@@ -1,0 +1,1 @@
+---🪶 Step 3: Create `.gitignore`This ensures you don’t upload large or temporary files.```textvenv/__pycache__/*.pyc*.log*.pdf*.csv*.jsonloutputs/insurance_llm/.DS_Store.idea/

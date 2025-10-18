@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ILM Chunk Dashboard</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f4f7f9; color: #333; margin: 0; padding: 2rem; }
+        .container { max-width: 1200px; margin: auto; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        h1 { color: #1a253c; }
+        .summary { display: flex; gap: 1rem; margin-bottom: 1rem; }
+        .card { padding: 1rem; border-radius: 8px; text-align: center; flex-grow: 1; background-color: #eef2ff;}
+        .card h2 { margin: 0; font-size: 2rem; }
+        .card p { margin: 0; color: #666; }
+        .search-bar { width: 100%; padding: 0.75rem; font-size: 1rem; border-radius: 6px; border: 1px solid #ddd; margin-bottom: 2rem; box-sizing: border-box; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        th, td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid #eee; }
+        th { background-color: #f8f9fa; }
+        td.chunk-text { max-width: 500px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        td.chunk-text:hover { white-space: normal; overflow: visible; }
+        .tag { background-color: #e0e7ff; color: #4338ca; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 ILM Chunk Dashboard</h1>
+        
+        <div class="summary">
+            <div class="card"><h2>{{ summary.total_docs }}</h2><p>Source Books</p></div>
+            <div class="card"><h2>{{ summary.total_chunks }}</h2><p>Total Chunks</p></div>
+        </div>
+        
+        <form method="get" action="/">
+            <input type="search" name="search" class="search-bar" placeholder="Search chunk text..." value="{{ summary.search_query }}">
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Source ID</th>
+                    <th>Source Document</th>
+                    <th>Chunk Text</th>
+                    <th>Stage</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for chunk in chunks %}
+                <tr>
+                    <td>{{ chunk.source_id }}</td>
+                    <td>{{ chunk.source_document }}</td>
+                    <td class="chunk-text" title="{{ chunk.text }}">{{ chunk.text }}</td>
+                    <td><span class="tag">{{ chunk.processing_stage }}</span></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
